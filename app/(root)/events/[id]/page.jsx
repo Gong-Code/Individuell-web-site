@@ -35,7 +35,7 @@ const EventDetailsPage = ({ params }) => {
             }
         }
 
-        if (user && event) {
+        if (user && event && event.bookedUsers) {
             const checkIfBooked = () => {
                 const booked = event.bookedUsers.some(bookedUser => bookedUser.id === user.uid);
                 setIsBooked(booked);
