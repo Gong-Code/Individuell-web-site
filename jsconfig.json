@@ -3,5 +3,8 @@
     "paths": {
       "@/*": ["./*"]
     }
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["<rootDir>/jest.setup.js"]
   }
 }
