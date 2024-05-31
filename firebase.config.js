@@ -15,9 +15,11 @@ const firebaseConfig = {
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig) //initializeApp({ projectId: 'test',appId: 'test',apiKey: 'test', });
 
-// Jag måste göra initializeApp med dessa props för att få testet att funka, 
-// annars för jag api-key/invalid.
-// Kommentera ut initializeApp med dessa props så funkar testet.
+/* =============================================
+=    Avkommentera koden ovanför vid testning
+=    och kommentera bort koden ovan, annars får
+=    du error api-key/invalid.
+============================================= */
 
 const db = getFirestore(app);
 const auth = getAuth(app);
