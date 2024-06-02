@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { ImSpinner8 } from 'react-icons/im';
 
 const EventDetailsPage = ({ params }) => {
     const [event, setEvent] = useState(null);
@@ -67,7 +68,7 @@ const EventDetailsPage = ({ params }) => {
     }, [user, event]);
 
     if (!event) {
-        return <div>Loading...</div>;
+        return <div className="h-screen flex items-center justify-center"><ImSpinner8 className="animate-spin text-orange-500" size={30} /></div>;
     }
 
     const handleBook = async () => {
