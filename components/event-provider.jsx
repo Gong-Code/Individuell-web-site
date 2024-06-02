@@ -22,30 +22,31 @@ const EventContextProvider = ({ children }) => {
     useEffect(() => {
         let isSubscribed = true;
     
-        try {
-            const getAllEvent = async () => {
+        const getAllEvent = async () => {
+            try {
                 const response = await fetch('http://localhost:3000/api/events');
                 if(!response.ok) {
-                throw new Error('Failed to get all event', response.status)
+                    throw new Error('Failed to get all event', response.status)
                 }
-        
+    
                 const data = await response.json();
                 console.log(data)
-                
+    
                 const futureEvents = checkDatesOnEvents(data)
-                setEvents(futureEvents)
-            }
-        
-            getAllEvent()
-        
+                if (isSubscribed) {
+                    setEvents(futureEvents)
+                }
             } catch (err) {
-            console.log(err.message)
+                console.log(err.message)
             }
-        
-            return () => {
+        }
+    
+        getAllEvent()
+    
+        return () => {
             isSubscribed = false; 
-            }
-        }, [])
+        }
+    }, [])
 
 
     const value = {
