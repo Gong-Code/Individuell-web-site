@@ -51,7 +51,7 @@ const EventDetailsPage = ({ params }) => {
     }, [id]);
 
     useEffect(() => {
-        if (user && event) {
+        if (user && event && event.bookedUsers) {
             const checkIfBooked = () => {
                 const booked = event.bookedUsers.some(bookedUser => bookedUser.id === user.uid);
                 setIsBooked(booked);
@@ -70,7 +70,7 @@ const EventDetailsPage = ({ params }) => {
             router.push('/sign-in')
             return;
         } 
-        else if(event.bookedUsers.length >= event.numberOfSpots) {
+        else if(event && event.bookedUsers && event.bookedUsers.length >= event.numberOfSpots) {
             toast.error('This event is full');
             return;
         }
@@ -86,6 +86,7 @@ const EventDetailsPage = ({ params }) => {
                 });
 
                 if (!response.ok) {
+                    console.log('Response', response)
                     throw new Error('Failed to book event');
                 }
 
