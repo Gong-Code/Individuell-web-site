@@ -53,14 +53,9 @@ const Header = () => {
 
                     {user && (
                         <>
-                            <Button>
-                                <Link href="/profile">Profile</Link>
-                            </Button>
-
                             <Button onClick={handleSignOut}>
                                 Sign Out
                             </Button>
-
                         </>
                     )}
                 </div>
