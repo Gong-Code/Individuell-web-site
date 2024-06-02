@@ -51,6 +51,7 @@ const EventDetailsPage = ({ params }) => {
     }, [id]);
 
     useEffect(() => {
+        let isSubscribed = true;
         if (user && event && event.bookedUsers) {
             const checkIfBooked = () => {
                 const booked = event.bookedUsers.some(bookedUser => bookedUser.id === user.uid);
@@ -58,6 +59,11 @@ const EventDetailsPage = ({ params }) => {
             };
             checkIfBooked();
         }
+
+        return () => {
+            isSubscribed = false; 
+        };
+
     }, [user, event]);
 
     if (!event) {
