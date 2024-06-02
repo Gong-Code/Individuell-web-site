@@ -167,14 +167,16 @@ const EventDetailsPage = ({ params }) => {
                 )}
                 </div>
                 <div className="p-8 bg-slate-700">
-                    <div className="uppercase tracking-wide text-sm text-orange-500 font-semibold">{event.name}</div>
+                    <div className="uppercase tracking-wide text-md text-orange-500 font-bold">{event.name}</div>
                     <div className="mt-2 text-white">{event.description}</div>
                     <div className="mt-2 text-white">Location: <span className="text-amber-600">{event.location}</span></div>
                     <div className="mt-2 text-white">Date: <span className="text-amber-600">{event.date}</span></div>
                     <div className="mt-2 text-white">Available Spots: 
                         <span className="text-amber-600">
                             {
-                                event && event.bookedUsers ? event.numberOfSpots - event.bookedUsers.length : event.numberOfSpots
+                                event && event.bookedUsers && event.bookedUsers.length >= event.numberOfSpots 
+                                ? ' Event is full' 
+                                : event.numberOfSpots - event.bookedUsers.length
                             }
                         </span> 
                     </div>
@@ -188,8 +190,10 @@ const EventDetailsPage = ({ params }) => {
                         </button>
                     ) : (
                         <button 
-                            className="mt-4 bg-emerald-600 hover:bg-emerald-400 text-white font-bold py-2 px-4 rounded cursor-pointer"
+                            className={`mt-4 font-bold py-2 px-4 rounded cursor-pointer 
+                                ${event && event.bookedUsers && event.bookedUsers.length >= event.numberOfSpots ? 'bg-gray-400 hover:bg-gray-300' : 'bg-emerald-600 hover:bg-emerald-400'} text-white`}
                             onClick={handleBook}
+                            disabled={event && event.bookedUsers && event.bookedUsers.length >= event.numberOfSpots}
                         >
                             Book
                         </button>
